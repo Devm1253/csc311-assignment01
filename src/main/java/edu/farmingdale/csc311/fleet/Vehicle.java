@@ -23,8 +23,19 @@ public abstract class Vehicle implements Honkable {
      *      engineSize      double     liters
      *      fuelType        FuelType
      *      fuelCapacity    double     gallons, or kWh when electric
-     *
-     * Then write the constructor. Check every argument before you store it
+     */
+    private final String vin;
+    private final String make;
+    private final String model;
+    private int year;
+    private String color;
+    private int wheels;
+    private final double engineSize;
+    private final FuelType fuelType;
+    private  double fuelCapacity;
+
+
+     /* Then write the constructor. Check every argument before you store it
      * and throw IllegalArgumentException when a rule is broken. The message
      * must name the field and show the bad value. Rules:
      *
@@ -46,7 +57,36 @@ public abstract class Vehicle implements Honkable {
 
     protected Vehicle(String vin, String make, String model, int year, String color,
                       int wheels, double engineSize, FuelType fuelType, double fuelCapacity) {
-        throw new UnsupportedOperationException("TODO-02");
+
+        if(vin == null || vin.trim().length() != 17){
+            throw new IllegalArgumentException("Vin needs to 17 characters");
+        }
+        this.vin = vin.trim().toUpperCase();
+        if(make == null || make.trim().isEmpty() ){
+            throw new IllegalArgumentException("make cant be null");
+        }
+        this.make = make.trim();
+        if(model == null || model.trim().isEmpty()){
+            throw new IllegalArgumentException("model cant be null");
+        }
+        this.model = model.trim();
+
+        if(fuelType == null) throw new IllegalArgumentException("Fueltype can not be null" );
+        this.fuelType = fuelType;
+
+        if(fuelType.hasEngine()){
+            if(engineSize <= 0.0 || engineSize >= 8.5){
+                throw new IllegalArgumentException("Engine size can not smaller 0.0 or biger than 8.5" );
+
+            }
+        }else if (engineSize != 0.0) {  throw new IllegalArgumentException("Electric cars cant have engineSize that is anyhthing other than 0 " );}
+        this.engineSize = engineSize;
+
+        setYear(year);
+        setColor(color);
+        setWheels(wheels);
+        setFuelCapacity(fuelCapacity);
+
     }
 
     /* ------------------------------------------------------------------
@@ -57,36 +97,31 @@ public abstract class Vehicle implements Honkable {
      * check twice.
      * ------------------------------------------------------------------ */
 
-    public String getVin() {
-        throw new UnsupportedOperationException("TODO-03");
-    }
+    public String getVin() {return vin;}
 
-    public String getMake() {
-        throw new UnsupportedOperationException("TODO-03");
-    }
+    public String getMake() { return make;}
 
-    public String getModel() {
-        throw new UnsupportedOperationException("TODO-03");
-    }
+    public String getModel() { return model; }
 
-    public int getYear() {
-        throw new UnsupportedOperationException("TODO-03");
-    }
+    public int getYear() { return year;}
 
     public void setYear(int year) {
-        throw new UnsupportedOperationException("TODO-03");
+       if( year <= 1900 || year >= 2100){ throw new IllegalArgumentException("Car year can only be 1900 - 2100");
+           this.year = year;
     }
 
     public String getColor() {
-        throw new UnsupportedOperationException("TODO-03");
+       return color;
     }
 
     public void setColor(String color) {
-        throw new UnsupportedOperationException("TODO-03");
+            if(model == null || model.trim().isEmpty()){
+                throw new IllegalArgumentException("model cant be null"); }
+            this.color = color;
     }
 
     public int getWheels() {
-        throw new UnsupportedOperationException("TODO-03");
+        return wheels;
     }
 
     public void setWheels(int wheels) {
