@@ -115,8 +115,8 @@ public abstract class Vehicle implements Honkable {
     }
 
     public void setColor(String color) {
-            if(model == null || model.trim().isEmpty()){
-                throw new IllegalArgumentException("model cant be null"); }
+            if(color == null || color.trim().isEmpty()){
+                throw new IllegalArgumentException("color cant be null"); }
             this.color = color;
     }
 
@@ -145,9 +145,9 @@ public abstract class Vehicle implements Honkable {
          if(fuelCapacity <= 0.0){
              throw new IllegalArgumentException("FuelCapacity can't be 0.0");
          }
+        this.fuelCapacity = fuelCapacity;
          }
 
-    }
 
     /* ------------------------------------------------------------------
      * TODO-04     commit: TODO-04: implement honk methods from Honkable
@@ -162,23 +162,27 @@ public abstract class Vehicle implements Honkable {
      * and honk() calls whichever one the object actually is.
      * ------------------------------------------------------------------ */
 
-    @Override
-    public void honk() {
-        throw new UnsupportedOperationException("TODO-04");
-    }
+@Override
+public void honk() {
+    System.out.println(hornSound());
+}
 
-    @Override
-    public void honk(int times) {
-        throw new UnsupportedOperationException("TODO-04");
-    }
+@Override
+public void honk(int times) {
+  if  (times <1 ) { throw new IllegalArgumentException("times must be at least 1" ); }
+  while (times > 0){
+      System.out.println(hornSound());
+      times--;
+  }
+}
 
-    /** Subclasses answer these two. Do not write bodies here. */
-    public abstract String category();
+/** Subclasses answer these two. Do not write bodies here. */
+public abstract String category();
 
-    public abstract double rangeInMiles();
+public abstract double rangeInMiles();
 
-    /* ------------------------------------------------------------------
-     * TODO-05     commit: TODO-05: add toString, equals and hashCode
+/* ------------------------------------------------------------------
+ * TODO-05     commit: TODO-05: add toString, equals and hashCode
      *
      * toString() returns exactly this shape, built with String.format:
      *
