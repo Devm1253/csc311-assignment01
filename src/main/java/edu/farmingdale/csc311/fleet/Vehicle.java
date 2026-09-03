@@ -106,7 +106,7 @@ public abstract class Vehicle implements Honkable {
     public int getYear() { return year;}
 
     public void setYear(int year) {
-       if( year <= 1900 || year >= 2100){ throw new IllegalArgumentException("Car year can only be 1900 - 2100");
+       if( year <= 1900 || year >= 2100){ throw new IllegalArgumentException("Car year can only be 1900 - 2100");}
            this.year = year;
     }
 
@@ -125,23 +125,28 @@ public abstract class Vehicle implements Honkable {
     }
 
     public void setWheels(int wheels) {
-        throw new UnsupportedOperationException("TODO-03");
+     if( wheels <= 2 || wheels >= 18){ throw new IllegalArgumentException("wheels can can only be 2-18");}
+         this.wheels = wheels;
     }
 
     public double getEngineSize() {
-        throw new UnsupportedOperationException("TODO-03");
+      return engineSize;
     }
 
     public FuelType getFuelType() {
-        throw new UnsupportedOperationException("TODO-03");
+       return fuelType;
     }
 
     public double getFuelCapacity() {
-        throw new UnsupportedOperationException("TODO-03");
+       return fuelCapacity;
     }
 
     public void setFuelCapacity(double fuelCapacity) {
-        throw new UnsupportedOperationException("TODO-03");
+         if(fuelCapacity <= 0.0){
+             throw new IllegalArgumentException("FuelCapacity can't be 0.0");
+         }
+         }
+
     }
 
     /* ------------------------------------------------------------------
