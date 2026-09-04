@@ -71,15 +71,15 @@ public abstract class Vehicle implements Honkable {
         }
         this.model = model.trim();
 
-        if(fuelType == null) throw new IllegalArgumentException("Fueltype can not be null" );
         this.fuelType = fuelType;
 
-        if(fuelType.hasEngine()){
-            if(engineSize <= 0.0 || engineSize >= 8.5){
-                throw new IllegalArgumentException("Engine size can not smaller 0.0 or biger than 8.5" );
-
+        if (fuelType.hasEngine()) {
+            if (engineSize <= 0.0 || engineSize > 8.5) {
+                throw new IllegalArgumentException("Engine size can not smaller 0.0 or biger than 8.5");
             }
-        }else if (engineSize != 0.0) {  throw new IllegalArgumentException("Electric cars cant have engineSize that is anyhthing other than 0 " );}
+        } else if (engineSize != 0.0) {
+            throw new IllegalArgumentException("Electric cars cant have engineSize that is anyhthing other than 0 ");
+        }
         this.engineSize = engineSize;
 
         setYear(year);
@@ -203,7 +203,7 @@ public abstract double rangeInMiles();
         String sizeofEngine;
         if(fuelType.hasEngine()){
             sizeofEngine = engineSize + "L";
-        } else { sizeofEngine = "N/a"; }
+        } else { sizeofEngine = "n/a"; }
 
         return  String.format("%d %s %s [VIN=%s] color=%s, wheels=%d, engine=%s, fuel=%s, capacity=%s %s",
                year, make, model, vin, color, wheels,  sizeofEngine, fuelType.getLabel(), fuelCapacity, fuelType.getUnit());

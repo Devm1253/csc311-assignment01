@@ -55,7 +55,7 @@ public enum FuelType {
 
     /** False for ELECTRIC, true for the rest. */
     public boolean hasEngine() {
-        if(this != ELECTRIC) return false;
+        if(this == ELECTRIC) return false;
 
         return true;
     }

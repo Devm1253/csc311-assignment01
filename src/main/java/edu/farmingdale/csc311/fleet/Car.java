@@ -32,7 +32,7 @@ public class Car extends Vehicle {
         super(vin, make, model, year, color, wheels, engineSize, fuelType, fuelCapacity);
 
         // TODO-06 step 2: check and store doors here.
-        this.doors = doors;
+        setDoors(doors);
     }
 
     public int getDoors() {
