@@ -3,7 +3,7 @@ package edu.farmingdale.csc311.fleet;
 /**
  * The fuels a fleet vehicle can run on.
  *
- * @author YOUR NAME HERE
+ * @author Dev Mondal
  */
 public enum FuelType {
 
