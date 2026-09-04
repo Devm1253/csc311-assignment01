@@ -4,7 +4,7 @@ package edu.farmingdale.csc311.fleet;
  * A named group of vehicles stored in a plain array.
  * No ArrayList, no HashMap. Arrays and loops only.
  *
- * @author YOUR NAME HERE
+ * @author Dev
  */
 public class Fleet {
 
@@ -50,36 +50,89 @@ public class Fleet {
      *        overwrite your slots, so copy it.
      * ------------------------------------------------------------------ */
 
+
+    private final String name;
+    private final Vehicle[] vehicles;
+    private int count;
+
+
     public Fleet(String name) {
-        throw new UnsupportedOperationException("TODO-08");
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("name cant be blank");
+        }
+        this.name = name.trim();
+        this.vehicles = new Vehicle[MAX_VEHICLES];
+        this.count = 0;
     }
 
     public String getName() {
-        throw new UnsupportedOperationException("TODO-08");
+        return name;
     }
 
     public boolean contains(Vehicle vehicle) {
-        throw new UnsupportedOperationException("TODO-08");
+
+        for(int i = 0; i < count; i++){
+            if(vehicles[i].equals(vehicle)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean add(Vehicle vehicle) {
-        throw new UnsupportedOperationException("TODO-08");
+
+        if(vehicle == null) return false;
+        if(contains(vehicle)) return false;
+        if(count>= MAX_VEHICLES) return false;
+
+        vehicles[count++] = vehicle;
+        return  true;
     }
 
     public boolean removeByVin(String vin) {
-        throw new UnsupportedOperationException("TODO-08");
+      if(vin ==null || vin.trim().isEmpty())return false;
+      int idx = -1;
+      for(int i = 0; i < count; i++){
+          if(vehicles[i].getVin().equalsIgnoreCase(vin.trim())){
+              idx = i;
+              break;
+          }
+      }
+      if(idx == -1) return false;
+
+        for (int i = idx; i < count - 1; i++) {
+            vehicles[i] = vehicles[i + 1];
+        }
+
+        vehicles[count - 1] = null;
+        count--;
+        return true;
     }
 
     public Vehicle findByVin(String vin) {
-        throw new UnsupportedOperationException("TODO-08");
+        Vehicle found = null;
+        if (vin == null) {
+            return null;
+        }
+        for (int i = 0; i < count; i++) {
+            if (vehicles[i].getVin().equalsIgnoreCase(vin.trim())) {
+                found = vehicles[i];
+                break;
+            }
+        }
+        return found;
     }
 
     public int size() {
-        throw new UnsupportedOperationException("TODO-08");
+        return count;
     }
 
     public Vehicle[] toArray() {
-        throw new UnsupportedOperationException("TODO-08");
+        Vehicle[] newArr = new Vehicle[count] ;
+        for (int i = 0; i < count; i++) {
+            newArr[i] = vehicles[i];
+        }
+        return newArr;
     }
 
     /* ------------------------------------------------------------------
