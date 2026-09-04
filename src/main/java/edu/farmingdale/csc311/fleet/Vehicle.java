@@ -200,16 +200,29 @@ public abstract double rangeInMiles();
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("TODO-05");
+        String sizeofEngine;
+        if(fuelType.hasEngine()){
+            sizeofEngine = engineSize + "L";
+        } else { sizeofEngine = "N/a"; }
+
+        return  String.format("%d %s %s [VIN=%s] color=%s, wheels=%d, engine=%s, fuel=%s, capacity=%s %s",
+               year, make, model, vin, color, wheels,  sizeofEngine, fuelType.getLabel(), fuelCapacity, fuelType.getUnit());
     }
 
     @Override
     public boolean equals(Object other) {
-        throw new UnsupportedOperationException("TODO-05");
+     if(this == other){
+         return true;
+     }
+     if(!(other instanceof Vehicle)){
+         return false;
+     }
+     Vehicle obj = (Vehicle) other;
+        return this.vin.equals(obj.vin);
     }
 
     @Override
     public int hashCode() {
-        throw new UnsupportedOperationException("TODO-05");
+        return vin.hashCode();
     }
 }
